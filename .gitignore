@@ -39,6 +39,9 @@ _depends/
 .ninja_log
 build.ninja
 
+__pycache__/
+*.py[cod]
+
 *.o
 *.lo
 *.obj
