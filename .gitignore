@@ -1,0 +1,99 @@
+# -----------------------------
+# OS / Editor / IDE
+# -----------------------------
+.DS_Store
+Thumbs.db
+Desktop.ini
+*.swp
+*.swo
+*~
+.tags
+tags
+.idea/
+.vscode/
+.history/
+.cache/
+.ccache/
+*.orig
+*.rej
+
+# -----------------------------
+# Build / Intermediate Files
+# -----------------------------
+/build/
+/build-*/
+/cmake-build-*/
+
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+CTestTestfile.cmake
+DartConfiguration.tcl
+Testing/
+_install/
+_depends/
+/_deps/
+
+.build/
+.ninja_deps
+.ninja_log
+build.ninja
+
+*.o
+*.lo
+*.obj
+*.gch
+*.pch
+
+# -----------------------------
+# Libraries / Platform Artifacts
+# -----------------------------
+*.a
+*.la
+*.lib
+*.so
+*.so.*
+*.dylib
+*.dll
+*.app
+*.lto
+*.dSYM/
+*.pdb
+
+# -----------------------------
+# Tooling / Analysis
+# -----------------------------
+compile_commands.json
+.ccls-cache/
+
+*.gcno
+*.gcda
+*.gcov
+*.profraw
+*.profdata
+lcov.info
+coverage/
+sanitizer*.log
+valgrind*.log
+
+# -----------------------------
+# Temporary Files / Logs
+# -----------------------------
+*.log
+log/*
+!log/.gitkeep
+*.pid
+*.sock
+tmp/
+run/
+
+# -----------------------------
+# Local Data / Environment
+# -----------------------------
+.env
+.env.*
+
+# -----------------------------
+# Development Notes / References
+# -----------------------------
+reference/
