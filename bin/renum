@@ -1,6 +1,22 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
+# Dependencies:
+# - bash
+# - python3 >= 3.10
+# - Python standard library only for ZIP input/output
+# - 7z or unrar for RAR input extraction
+
 root_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+
+if ! command -v python3 >/dev/null 2>&1; then
+  printf '%s\n' "renum: error: python3 is required but was not found in PATH." >&2
+  exit 3
+fi
+
+if ! python3 -c 'import sys; raise SystemExit(0 if sys.version_info >= (3, 10) else 1)' >/dev/null 2>&1; then
+  printf '%s\n' "renum: error: python3 3.10 or newer is required." >&2
+  exit 3
+fi
 
 exec python3 "$root_dir/libexec/renum/main.py" "$@"
