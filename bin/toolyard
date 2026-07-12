@@ -1,0 +1,39 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+root_dir="$(cd -- "$(dirname -- "${BASH_SOURCE[0]}")/.." && pwd)"
+bin_dir="$root_dir/bin"
+
+case "${1:-help}" in
+    list|ls)
+        for path in "$bin_dir"/*; do
+            [ -f "$path" ] || continue
+            [ -x "$path" ] || continue
+            [ "$(basename -- "$path")" != toolyard ] || continue
+            basename -- "$path"
+        done | sort
+        ;;
+
+    update)
+        git -C "$root_dir" pull --ff-only
+        ;;
+
+    root)
+        printf '%s\n' "$root_dir"
+        ;;
+
+    help|-h|--help)
+        printf '%s\n' \
+            'Usage: toolyard <command>' \
+            '' \
+            'Commands:' \
+            '  list, ls    List available tools' \
+            '  update      Update Toolyard' \
+            '  root        Print repository root'
+        ;;
+
+    *)
+        printf 'toolyard: unknown command: %s\n' "$1" >&2
+        exit 2
+        ;;
+esac
