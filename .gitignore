@@ -97,6 +97,11 @@ run/
 .env.*
 
 # -----------------------------
+# Downloaded Tool Payloads
+# -----------------------------
+libexec/sfil/
+
+# -----------------------------
 # Development Notes / References
 # -----------------------------
 reference/

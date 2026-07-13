@@ -1,0 +1,47 @@
+#!/bin/sh
+set -eu
+
+root_dir="$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)"
+install_dir="$root_dir/libexec/sfil"
+binary="$install_dir/sfil"
+
+install_sfil() {
+    os="$(uname -s)"
+    arch="$(uname -m)"
+
+    case "$os:$arch" in
+        Linux:x86_64)
+            asset="sfil-linux-x86_64"
+            ;;
+        Darwin:arm64)
+            asset="sfil-macos-arm64"
+            ;;
+        *)
+            printf 'sfil: unsupported platform: %s %s\n' "$os" "$arch" >&2
+            exit 1
+            ;;
+    esac
+
+    url="https://github.com/recelsus/sfil/releases/latest/download/$asset"
+    tmp="$install_dir/.sfil.tmp"
+
+    mkdir -p "$install_dir"
+
+    printf 'sfil: installing %s...\n' "$asset" >&2
+
+    if ! curl -fL "$url" -o "$tmp"; then
+        rm -f "$tmp"
+        printf 'sfil: installation failed\n' >&2
+        exit 1
+    fi
+
+    chmod +x "$tmp"
+    mv "$tmp" "$binary"
+}
+
+if [ ! -x "$binary" ]; then
+    install_sfil
+fi
+
+exec "$binary" "$@"
+
